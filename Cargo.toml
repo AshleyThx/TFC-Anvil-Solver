@@ -1,0 +1,9 @@
+[package]
+name = "tfc-anvil-solver"
+version = "0.1.0"
+edition = "2024"
+description = "CLI tools for solving TFC Anvil recipes with the least number of actions"
+repository = "https://github.com/AshleyThx/TFC-Anvil-Solver"
+publish = false
+
+[dependencies]
