@@ -7,6 +7,9 @@ pub fn simple_solve(goal_points: i32, rules: &[&Action; 3]) -> Vec<&'static Acti
     for action in rules {
         points_left -= action.points;
     }
+    if points_left < 0 {
+        panic!("Invalid goal or/and rules")
+    }
 
     for n in (5..8).rev() {
         if points_left <= 1 {
