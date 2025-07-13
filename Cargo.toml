@@ -7,3 +7,4 @@ repository = "https://github.com/AshleyThx/TFC-Anvil-Solver"
 publish = false
 
 [dependencies]
+colored = "3.0.0"
