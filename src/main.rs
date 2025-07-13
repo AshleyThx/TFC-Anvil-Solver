@@ -1,7 +1,7 @@
 mod action;
 use action::{Action, COMMON_ACTIONS};
 
-use std::io::{self, Read};
+use std::io::{self};
 
 mod solver;
 use solver::simple_solve;
@@ -23,7 +23,6 @@ fn read_rule() -> u8 {
 
 fn main() {
     let mut rules: [&Action; 3] = [&COMMON_ACTIONS[8], &COMMON_ACTIONS[8], &COMMON_ACTIONS[8]];
-    let mut goal_points: i32 = 0;
 
     println!("Every action for rules: [");
     let mut common_act_count = 0;
@@ -33,7 +32,7 @@ fn main() {
     }
     println!("]\nGoal, Rule1, Rule2, Rule3");
 
-    goal_points = read_u8() as i32;
+    let goal_points: i32 = read_u8() as i32;
 
     for n in 0..3 {
         rules[n] = &COMMON_ACTIONS[(read_rule() - 1) as usize];
