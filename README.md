@@ -8,6 +8,5 @@ Simple CLI program for solving **TFC Anvil recipes** with the **least number of 
 3. First input is the goal points of the recipe. You can see them with a resourcepack.
 4. Next 3 inputs are recipe rules. You can see find them in Minecraft. The right order is from left to right. You need to input action numbers accordingly to the hint of the program.
 5. Use the list of actions the program gave you to finish the recipe.
-
-# GUI
+## GUI
 **TODO**
