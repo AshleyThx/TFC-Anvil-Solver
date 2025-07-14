@@ -8,42 +8,40 @@ mod solver;
 use solver::simple_solve;
 
 fn read_u8() -> u8 {
-    let mut figure_buf = String::new();
-    io::stdin().read_line(&mut figure_buf).unwrap();
-    figure_buf.trim().parse::<u8>().expect("Number expected")
+    let mut num = String::new();
+    io::stdin().read_line(&mut num).unwrap();
+    num.trim().parse::<u8>().expect("Number expected")
 }
 
-fn read_rule() -> u8 {
-    let figure = read_u8();
-    if (1..COMMON_ACTIONS.len()).contains(&usize::from(figure)) {
-        return figure;
+fn read_rule() -> usize {
+    let mut num = read_u8() as usize;
+    num = if num == 0 {
+        COMMON_ACTIONS.len() - 1
+    } else {
+        num - 1
+    };
+
+    if (0..COMMON_ACTIONS.len()).contains(&usize::from(num)) {
+        return num;
     } else {
         panic!("Invalid rule number");
     }
 }
 
-fn main() {
-    let mut rules: [&Action; 3] = [&COMMON_ACTIONS[8], &COMMON_ACTIONS[8], &COMMON_ACTIONS[8]];
-
+fn print_all_actions() {
     println!("{}", "Every action for rules: [".bright_yellow());
-    let mut common_act_count = 0;
-    for action in COMMON_ACTIONS {
-        common_act_count += 1;
-        println!(
-            "{}",
-            format!("\t{}. {}", common_act_count, action.name).bright_yellow()
-        );
+    for idx in 0..COMMON_ACTIONS.len() {
+        let act_num = if idx == 0 {
+            COMMON_ACTIONS.len() - 1
+        } else {
+            idx - 1
+        };
+        let action = &COMMON_ACTIONS[act_num];
+        println!("{}", format!("\t{}. {}", idx, action.name).bright_yellow());
     }
-    println!("{}", "]\nGoal, Rule1, Rule2, Rule3".bright_yellow());
+}
 
-    let goal_points: i32 = read_u8() as i32;
-
-    for n in 0..3 {
-        rules[n] = &COMMON_ACTIONS[(read_rule() - 1) as usize];
-    }
-
-    let solution = simple_solve(goal_points, &rules);
-
+fn print_solution(solution: Vec<&Action>, rules: &[&Action; 3]) {
     println!("{}", "This is the solution: [".bright_green());
     let mut act_count = 0;
     for action in solution {
@@ -62,4 +60,19 @@ fn main() {
         );
     }
     println!("{}", "]".bright_green());
+}
+
+fn main() {
+    let mut rules: [&Action; 3] = [&COMMON_ACTIONS[8], &COMMON_ACTIONS[8], &COMMON_ACTIONS[8]];
+
+    print_all_actions();
+
+    println!("{}", "]\nGoal, Rule1, Rule2, Rule3".bright_yellow());
+    let goal_points: i32 = read_u8() as i32;
+    for n in 0..3 {
+        let action = &COMMON_ACTIONS[read_rule()];
+        rules[n] = action
+    }
+
+    print_solution(simple_solve(goal_points, &rules), &rules);
 }
