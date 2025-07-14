@@ -51,7 +51,7 @@ pub fn simple_solve(goal_points: i32, rules: &[&Action; 3]) -> Vec<&'static Acti
         }
     }
 
-    solution_actions.sort_by(|a, b| a.points.cmp(&b.points));
+    solution_actions.sort_by(|a, b| a.points.cmp(&b.points).reverse());
 
     solution_actions
 }
