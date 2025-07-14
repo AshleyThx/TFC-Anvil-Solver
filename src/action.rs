@@ -14,7 +14,7 @@ pub const COMMON_ACTIONS: [Action; 9] = [
     },
     Action {
         points: -6,
-        name: "Normal Hit",
+        name: "Medium Hit",
     },
     Action {
         points: -9,
